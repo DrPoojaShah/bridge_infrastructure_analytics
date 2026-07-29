@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="figures/bridge_banner.png" alt="Bridge Infrastructure Analytics" width="100%">
-</p>
-
 # 🌉 Bridge Infrastructure Analytics: Predictive Maintenance and Structural Health Assessment
 
 ![Python](https://img.shields.io/badge/Python-3.9-blue?logo=python)
