@@ -301,25 +301,22 @@ Potential extensions of this project include:
 ---
 
 
+---
+
 ## 👩‍💻 Author
 
 **Dr. Pooja Shah**
 
-M.S. in Data Analytics Engineering  
-George Mason University
+M.S. in Data Analytics Engineering, George Mason University  
+Ph.D. in Applied Mathematics
 
-### Research Interests
+📫 **GitHub:** https://github.com/DrPoojaShah
 
-- Machine Learning
-- Data Analytics
-- Infrastructure Analytics
-- Predictive Analytics
-- Applied Mathematics
+📫 **LinkedIn:** https://www.linkedin.com/in/drpoojashah
 
-📫 GitHub: *(your GitHub profile link)*
+---
 
-📫 LinkedIn: *(your LinkedIn profile link)*
-
+⭐ If you found this project interesting, consider giving the repository a star!
 ---
 
 
