@@ -179,17 +179,73 @@ The project demonstrates how Apache Spark can efficiently process and analyze la
 
 ## 📷 Visualizations
 
-### Bridge Condition Distribution
+### 1. Distribution of Deck Condition
 
-![Bridge Condition](figures/bridge_condition_distribution.png)
+The deck condition ratings are concentrated between **6 and 7**, indicating that most bridges are currently in fair to good condition, while relatively few bridges are in very poor condition.
 
-### Bridge Age Analysis
+![Distribution of Deck Condition](figures/deck_condition_distribution.png)
 
-![Bridge Age](figures/bridge_age_analysis.png)
+---
 
-### State-wise Analysis
+### 2. Distribution of Freeze–Thaw Cycles
 
-![State Analysis](figures/statewise_analysis.png)
+The majority of bridges experience **70–100 freeze–thaw cycles annually**, highlighting the significant environmental exposure that contributes to long-term structural deterioration.
+
+![Distribution of Freeze–Thaw Cycles](figures/freeze_thaw_distribution.png)
+
+---
+
+### 3. Distribution of Bridge Age
+
+Most bridges are **30–60 years old**, with fewer very old structures. The long right tail indicates the presence of aging infrastructure requiring continued monitoring.
+
+![Distribution of Bridge Age](figures/bridge_age_distribution.png)
+
+---
+
+### 4. Deck Condition by State
+
+Average deck condition varies across states. Differences in climate, maintenance practices, and environmental exposure contribute to variations in bridge health.
+
+![Deck Condition by State](figures/deck_condition_by_state.png)
+
+---
+
+### 5. Bridge Age by Freeze–Thaw Class
+
+Bridges located in regions with moderate and high freeze–thaw exposure generally exhibit higher age distributions and greater variability, suggesting cumulative environmental effects over time.
+
+![Bridge Age by Freeze–Thaw Class](figures/bridge_age_by_freeze_thaw_class.png)
+
+---
+
+## 📈 Machine Learning Results
+
+An XGBoost regression model was developed to predict bridge deck condition ratings using structural, environmental, and traffic-related features.
+
+### Model Performance
+
+| Metric | Value |
+|---------|------:|
+| RMSE | **0.668** |
+| R² Score | **0.579** |
+
+### Most Important Features
+
+| Rank | Feature |
+|------|---------|
+| 1 | Bridge Age |
+| 2 | Age² |
+| 3 | State |
+| 4 | Main Span Material |
+| 5 | Log(ADT) |
+| 6 | Deck Area |
+| 7 | Average Daily Traffic |
+| 8 | Freeze–Thaw per Age |
+| 9 | Freeze–Thaw² |
+| 10 | Freeze–Thaw Zone |
+
+The results indicate that **bridge age** is the strongest predictor of deck condition, followed by material type, geographic location, traffic exposure, and environmental factors. These findings demonstrate the effectiveness of combining structural and climate-related variables for predictive bridge health assessment.
 ---
 
 ## ▶️ How to Run
