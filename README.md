@@ -300,7 +300,7 @@ Potential extensions of this project include:
 
 ## 📊 Power BI Dashboard
 
-A three-page Power BI dashboard is designed to translate the bridge infrastructure analysis into an interactive decision-support tool for infrastructure managers, transportation analysts, and maintenance planners.
+The project includes a Power BI dashboard design package containing the dashboard layout, DAX measures, theme configuration, and implementation documentation. The interactive dashboard will be added after implementation in Power BI Desktop.
 
 ### Dashboard Pages
 
