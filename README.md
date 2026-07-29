@@ -296,6 +296,73 @@ Potential extensions of this project include:
 - Dashboard Development
 ---
 
+---
+
+## 📊 Power BI Dashboard
+
+A three-page Power BI dashboard is designed to translate the bridge infrastructure analysis into an interactive decision-support tool for infrastructure managers, transportation analysts, and maintenance planners.
+
+### Dashboard Pages
+
+#### 1. Executive Overview
+
+Provides a high-level summary of the national bridge inventory through:
+
+- Total number of bridges
+- Average deck condition rating
+- Average bridge age
+- Average daily traffic
+- Average annual freeze–thaw cycles
+- Bridge distribution by state
+- Deck condition distribution
+- Bridge age distribution
+
+#### 2. Structural Health Analysis
+
+Examines the relationship between structural characteristics and bridge condition through:
+
+- Average deck condition by state
+- Bridge age versus deck condition
+- Deck condition by main-span material
+- Bridge age by freeze–thaw exposure class
+- Deck condition by design type
+
+#### 3. Maintenance Risk Analysis
+
+Supports maintenance prioritization using:
+
+- Number of high-risk bridges
+- Percentage of bridges classified as high risk
+- Risk distribution by state
+- Risk distribution by material
+- Traffic and bridge-age risk matrix
+- A detailed maintenance-priority table
+
+### Dashboard Filters
+
+The dashboard supports interactive filtering by:
+
+- State
+- County
+- Main-span material
+- Main-span design
+- Freeze–thaw zone
+- Traffic category
+- Maintenance-risk level
+
+### Power BI Resources
+
+The [`powerbi`](powerbi/) directory contains:
+
+- Dashboard design documentation
+- DAX measures
+- Power BI theme configuration
+- Page-by-page visual specifications
+- Dashboard preview image
+
+> **Note:** Power BI Desktop is required to open the `.pbix` dashboard file. Power BI Desktop currently requires a Windows environment.
+
+---
 
 ---
 

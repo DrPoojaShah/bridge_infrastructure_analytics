@@ -1,0 +1,346 @@
+// ============================================================
+// BRIDGE INFRASTRUCTURE ANALYTICS
+// POWER BI DAX MEASURES
+// Table name expected: Bridges
+// ============================================================
+
+
+// ------------------------------------------------------------
+// INVENTORY MEASURES
+// ------------------------------------------------------------
+
+Total Bridges =
+COUNTROWS(Bridges)
+
+
+Distinct States =
+DISTINCTCOUNT(Bridges[state_name])
+
+
+Distinct Counties =
+DISTINCTCOUNT(Bridges[county_name])
+
+
+Total Deck Area =
+SUM(Bridges[deck_area_sqft])
+
+
+Average Deck Area =
+AVERAGE(Bridges[deck_area_sqft])
+
+
+// ------------------------------------------------------------
+// STRUCTURAL CONDITION MEASURES
+// ------------------------------------------------------------
+
+Average Deck Condition =
+AVERAGE(Bridges[deck_condition_rating])
+
+
+Median Deck Condition =
+MEDIAN(Bridges[deck_condition_rating])
+
+
+Minimum Deck Condition =
+MIN(Bridges[deck_condition_rating])
+
+
+Maximum Deck Condition =
+MAX(Bridges[deck_condition_rating])
+
+
+Good Condition Bridges =
+CALCULATE(
+    [Total Bridges],
+    Bridges[deck_condition_rating] >= 7
+)
+
+
+Fair Condition Bridges =
+CALCULATE(
+    [Total Bridges],
+    Bridges[deck_condition_rating] >= 5,
+    Bridges[deck_condition_rating] < 7
+)
+
+
+Poor Condition Bridges =
+CALCULATE(
+    [Total Bridges],
+    Bridges[deck_condition_rating] < 5
+)
+
+
+Good Condition Percentage =
+DIVIDE(
+    [Good Condition Bridges],
+    [Total Bridges],
+    0
+)
+
+
+Fair Condition Percentage =
+DIVIDE(
+    [Fair Condition Bridges],
+    [Total Bridges],
+    0
+)
+
+
+Poor Condition Percentage =
+DIVIDE(
+    [Poor Condition Bridges],
+    [Total Bridges],
+    0
+)
+
+
+// ------------------------------------------------------------
+// BRIDGE AGE MEASURES
+// ------------------------------------------------------------
+
+Average Bridge Age =
+AVERAGE(Bridges[bridge_age])
+
+
+Median Bridge Age =
+MEDIAN(Bridges[bridge_age])
+
+
+Old Bridges =
+CALCULATE(
+    [Total Bridges],
+    Bridges[bridge_age] >= 50
+)
+
+
+Old Bridge Percentage =
+DIVIDE(
+    [Old Bridges],
+    [Total Bridges],
+    0
+)
+
+
+Bridges Over 75 Years =
+CALCULATE(
+    [Total Bridges],
+    Bridges[bridge_age] >= 75
+)
+
+
+Bridges Over 75 Years Percentage =
+DIVIDE(
+    [Bridges Over 75 Years],
+    [Total Bridges],
+    0
+)
+
+
+// ------------------------------------------------------------
+// TRAFFIC MEASURES
+// ------------------------------------------------------------
+
+Average Daily Traffic =
+AVERAGE(Bridges[adt])
+
+
+Median Daily Traffic =
+MEDIAN(Bridges[adt])
+
+
+Total Daily Traffic =
+SUM(Bridges[adt])
+
+
+High Traffic Bridges =
+CALCULATE(
+    [Total Bridges],
+    Bridges[adt] >= 30000
+)
+
+
+High Traffic Bridge Percentage =
+DIVIDE(
+    [High Traffic Bridges],
+    [Total Bridges],
+    0
+)
+
+
+// ------------------------------------------------------------
+// ENVIRONMENTAL MEASURES
+// ------------------------------------------------------------
+
+Average Freeze-Thaw Cycles =
+AVERAGE(Bridges[freeze_thaw_cycles])
+
+
+Median Freeze-Thaw Cycles =
+MEDIAN(Bridges[freeze_thaw_cycles])
+
+
+Extreme Freeze-Thaw Bridges =
+CALCULATE(
+    [Total Bridges],
+    Bridges[freeze_thaw_cycles] >= 80
+)
+
+
+Extreme Freeze-Thaw Percentage =
+DIVIDE(
+    [Extreme Freeze-Thaw Bridges],
+    [Total Bridges],
+    0
+)
+
+
+// ------------------------------------------------------------
+// MAINTENANCE-RISK MEASURES
+// ------------------------------------------------------------
+
+High Risk Bridges =
+CALCULATE(
+    [Total Bridges],
+    Bridges[maintenance_risk] = "High Risk"
+)
+
+
+Moderate Risk Bridges =
+CALCULATE(
+    [Total Bridges],
+    Bridges[maintenance_risk] = "Moderate Risk"
+)
+
+
+Lower Risk Bridges =
+CALCULATE(
+    [Total Bridges],
+    Bridges[maintenance_risk] = "Lower Risk"
+)
+
+
+High Risk Percentage =
+DIVIDE(
+    [High Risk Bridges],
+    [Total Bridges],
+    0
+)
+
+
+Moderate Risk Percentage =
+DIVIDE(
+    [Moderate Risk Bridges],
+    [Total Bridges],
+    0
+)
+
+
+Lower Risk Percentage =
+DIVIDE(
+    [Lower Risk Bridges],
+    [Total Bridges],
+    0
+)
+
+
+// ------------------------------------------------------------
+// COMPARISON MEASURES
+// ------------------------------------------------------------
+
+National Average Deck Condition =
+CALCULATE(
+    [Average Deck Condition],
+    ALL(Bridges)
+)
+
+
+Deck Condition vs National Average =
+[Average Deck Condition] - [National Average Deck Condition]
+
+
+National Average Bridge Age =
+CALCULATE(
+    [Average Bridge Age],
+    ALL(Bridges)
+)
+
+
+Bridge Age vs National Average =
+[Average Bridge Age] - [National Average Bridge Age]
+
+
+National Average Freeze-Thaw =
+CALCULATE(
+    [Average Freeze-Thaw Cycles],
+    ALL(Bridges)
+)
+
+
+Freeze-Thaw vs National Average =
+[Average Freeze-Thaw Cycles] - [National Average Freeze-Thaw]
+
+
+// ------------------------------------------------------------
+// OPTIONAL DISPLAY TEXT
+// ------------------------------------------------------------
+
+Selected State Title =
+VAR SelectedState =
+    SELECTEDVALUE(Bridges[state_name], "All States")
+RETURN
+    "Bridge Infrastructure Summary — " & SelectedState
+
+
+Maintenance Summary =
+VAR HighRiskCount = [High Risk Bridges]
+VAR TotalCount = [Total Bridges]
+VAR RiskPercent = [High Risk Percentage]
+RETURN
+    FORMAT(HighRiskCount, "#,##0")
+        & " of "
+        & FORMAT(TotalCount, "#,##0")
+        & " bridges are classified as high risk ("
+        & FORMAT(RiskPercent, "0.0%")
+        & ")."
+
+
+Freeze-Thaw Zone =
+SWITCH(
+    TRUE(),
+    Bridges[freeze_thaw_cycles] < 20, "Low (0-20)",
+    Bridges[freeze_thaw_cycles] < 50, "Moderate (20-50)",
+    Bridges[freeze_thaw_cycles] < 80, "High (50-80)",
+    "Extreme (80+)"
+)
+
+
+Traffic Level =
+SWITCH(
+    TRUE(),
+    Bridges[adt] < 500, "Very Low",
+    Bridges[adt] < 2000, "Low",
+    Bridges[adt] < 10000, "Medium",
+    Bridges[adt] < 30000, "High",
+    "Very High"
+)
+
+
+Age Group =
+SWITCH(
+    TRUE(),
+    Bridges[bridge_age] < 20, "Under 20 Years",
+    Bridges[bridge_age] < 40, "20-39 Years",
+    Bridges[bridge_age] < 60, "40-59 Years",
+    Bridges[bridge_age] < 80, "60-79 Years",
+    "80+ Years"
+)
+
+
+Condition Category =
+SWITCH(
+    TRUE(),
+    Bridges[deck_condition_rating] >= 7, "Good",
+    Bridges[deck_condition_rating] >= 5, "Fair",
+    "Poor"
+)

@@ -48,3 +48,15 @@ metastore_db/
 # ==========================================================
 *.tmp
 *.bak
+
+
+#=========================================================
+# Power BI
+# Local Power BI input/output data
+data/processed/*.csv
+data/processed/*.parquet
+data/processed/bridge_powerbi_data_temp/
+
+# Temporary Power BI files
+*.pbit.tmp
+~$*.pbix
