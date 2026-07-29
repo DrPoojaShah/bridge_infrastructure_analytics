@@ -28,12 +28,19 @@ venv/
 env/
 
 # ==========================================================
-# Data Files
+# Raw Dataset (keep local only)
 # ==========================================================
 data/raw/PS1.csv
-data/processed/*
 
-# Keep the processed folder in Git
+# ==========================================================
+# Processed Data
+# Ignore generated datasets but keep documentation
+# ==========================================================
+data/processed/*.csv
+data/processed/*.parquet
+data/processed/bridge_powerbi_data_temp/
+
+!data/processed/README.md
 !data/processed/.gitkeep
 
 # ==========================================================
@@ -44,19 +51,13 @@ metastore_db/
 *.log
 
 # ==========================================================
-# Miscellaneous
+# Temporary / Backup Files
 # ==========================================================
 *.tmp
 *.bak
 
-
-#=========================================================
+# ==========================================================
 # Power BI
-# Local Power BI input/output data
-data/processed/*.csv
-data/processed/*.parquet
-data/processed/bridge_powerbi_data_temp/
-
-# Temporary Power BI files
+# ==========================================================
 *.pbit.tmp
 ~$*.pbix
